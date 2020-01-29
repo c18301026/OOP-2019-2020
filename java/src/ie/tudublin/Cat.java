@@ -17,4 +17,19 @@ public class Cat extends Animal
     {
         System.out.println("Meow!");
     }
+
+    public void kill()
+    {
+        numLives = numLives - 1;
+
+	if(numLives > 0)
+        {
+            System.out.println("Ouch!");
+	}
+
+	if(numLives == 0)
+	{
+	    System.out.println("Dead");
+	}
+    }
 }
