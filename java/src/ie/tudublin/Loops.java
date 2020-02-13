@@ -33,8 +33,8 @@ public class Loops extends PApplet
 		// fourthPattern();
 		// fifthPattern();
 		// sixthPattern();
-		// seventhPattern();
-		eigthPattern();
+		seventhPattern();
+		// eigthPattern();
 	}
 
 	public void firstPattern() {
@@ -154,21 +154,21 @@ public class Loops extends PApplet
 		int huehuehue = 0;
 		int nextRowStartHue = 0;
 
+		background(255);
 		noStroke();
 		colorMode(HSB);
 
-		for(col = 25; col < 525; col += 50) {
-			for(row = 25; row < 525; row += 50) {
+		for(row = 25; row < 525; row += 50) {
+			for(col = 25; col < 525; col += 50) {
 				fill(huehuehue, 255, 255);
 
 				ellipse(row, col, 50, 50);
 
-				huehuehue += 10;
+				huehuehue += 9;
 			}
 
+			nextRowStartHue += 9;
 			huehuehue = nextRowStartHue;
-
-			nextRowStartHue += 10;
 		}
 	}
 
