@@ -1,17 +1,14 @@
 package ie.tudublin;
 
+// Hello from Jacob
+
 import processing.core.PApplet;
 
 public class Arrays extends PApplet
-{
-	// one way to make an array
-	// float[] rainfall = new float[12];
+{	
 
-	// another way
-	// no compiler error when going from int to float because no truncation error
-	float[] rainfall = {45, 37, 55, 27, 38, 50, 79, 48, 104, 31, 100, 58};
-
-	// second way is an array of strings
+	//float[] rainFall = new float[12]; 
+	float[] rainFall = {45, 37, 55, 27, 38, 50, 79, 48, 104, 31, 100, 58};
 	String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
 	public void settings()
@@ -21,18 +18,59 @@ public class Arrays extends PApplet
 
 	public void setup() 
 	{
-		for(int i = 0; i < rainfall.length; i++) {
-			println(months[i] + "\t" + rainfall[i]); // in PApplet so no need for System.out.blahblahblah
+		for(int i = 0 ; i < rainFall.length; i ++)
+		{
+			println(months[i] + "\t" + rainFall[i]);
 		}
 
-		// For each loop
-		for(float f : rainfall) {
+		for(float f:rainFall)
+		{
 			println(f);
 		}
 
-		for(String s : months) {
+		for(String s:months)
+		{
 			println(s);
 		}
+
+		int minIndex = 0;
+		for(int i = 1 ; i < rainFall.length ; i ++)
+		{
+			if (rainFall[i] < rainFall[minIndex])
+			{
+				minIndex = i;
+			}
+		}
+		println(months[minIndex] + " had the minimum rainfall of " + rainFall[minIndex]);
+		
+		int maxIndex = 0;
+		for(int i = 1 ; i < rainFall.length ; i ++)
+		{
+			if (rainFall[i] > rainFall[maxIndex])
+			{
+				maxIndex = i;
+			}
+		}
+		println(months[maxIndex] + " had the maximum rainfall of " + rainFall[maxIndex]);
+	}
+
+	void drawBarChart()
+	{
+		float w = width / (float) rainFall.length;
+		float cGap = 255 / (float) rainFall.length;
+		noStroke();
+		colorMode(HSB);
+		for(int i = 0 ; i < rainFall.length ; i ++)
+		{
+			float x = i * w;
+			fill(i * cGap, 255, 255);
+			rect(x, height, w, -rainFall[i]);
+		}
+	}
+
+	void test()
+	{
+		
 	}
 
 	
@@ -54,5 +92,7 @@ public class Arrays extends PApplet
 	{	
 		background(0);		
 		colorMode(HSB);	
+
+		drawBarChart();
 	}
 }
