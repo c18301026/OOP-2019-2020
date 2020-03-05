@@ -10,7 +10,7 @@ public class SoundSynthesis extends PApplet
 {
     Minim minim;
     AudioOutput out;
-    Oscil wave;
+    Oscil wave, wave2, wave3;
 
     public void settings()
     {
@@ -23,8 +23,12 @@ public class SoundSynthesis extends PApplet
         minim = new Minim(this);
 
         out = minim.getLineOut();
-        wave = new Oscil( 440, 0.5f, Waves.SQUARE );
+        wave = new Oscil( 220, 0.5f, Waves.SQUARE );
+	wave2 = new Oscil( 440, 0.5f, Waves.SQUARE );
+	wave3 = new Oscil( 392, 0.5f, Waves.SQUARE );
         wave.patch(out);
+	wave2.patch(out);
+	wave3.patch(out);
     }
 
     public void keyPressed() {
@@ -44,6 +48,13 @@ public class SoundSynthesis extends PApplet
         wave.setFrequency(
             map(n, 0, 1, 200, 600)
         );
+	wave2.setFrequency(
+            map(n, 0, 1, 600, 1200)
+        );
+	wave3.setFrequency(
+            map(n, 0, 1, 1200, 2400)
+        );
+
         offset += 0.01f;
 
         float cx = width / 2;
