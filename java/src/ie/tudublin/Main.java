@@ -32,7 +32,7 @@ public class Main
 		String[] a = {"MAIN"};
         processing.core.PApplet.runSketch( a, new AirSeaBattle());
     }
-    
+
     public void dogsCats()
     {
         // Polymorphism means
@@ -74,7 +74,21 @@ public class Main
     
     public static void main(String[] arg)
     {
+	/* Task 1
         Main main = new Main();
-		main.helloArrays();        
+		main.helloArrays();
+	*/
+
+	// Task 2
+	PitchSpeller ps = new PitchSpeller();
+
+	//ps.test();
+	
+	System.out.println(ps.spell(330));
+	System.out.println(ps.spell(420));
+	System.out.println(ps.spell(1980));
+	System.out.println(ps.spell(1980));
+	System.out.println(ps.spell(370)); // F,
+	System.out.println(ps.spell(385)); // G,
     }
 }

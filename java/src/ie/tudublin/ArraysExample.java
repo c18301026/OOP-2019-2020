@@ -12,6 +12,11 @@ public class ArraysExample extends PApplet
 	float[] rainFall = {45, 37, 55, 27, 38, 50, 79, 48, 104, 31, 100, 58};
 	String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
+	// part 2 of lab
+	float[] frequencies = {293.66f, 329.63f, 369.99f, 392.00f, 440.00f, 493.88f, 554.37f, 587.33f
+			, 659.25f, 739.99f, 783.99f, 880.00f, 987.77f, 1108.73f, 1174.66f};
+	String[] spellings = {"D,", "E,", "F,", "G,", "A,", "B,", "C", "D", "E", "F", "G", "A", "B","c", "d", "e", "f", "g", "a", "b", "c'", "d'", "e'", "f'", "g'", "a'", "b'", "c''", "d''"};
+
 	public void settings()
 	{
 		size(500, 500);
@@ -76,58 +81,46 @@ public class ArraysExample extends PApplet
 		}
 	}
 
-	public void keyPressed()
-	{
-		if (key == ' ')
-		{
-			
-		}
-	}
-
 	public void graph() {
-		float border = width * 0.1f;
+		stroke(255, 255, 255);
+		// dafs = distance away from screen
+		float dafs = width * 0.1f;
+		float tickLength = dafs * 0.125f;
+
+		line(dafs, dafs, dafs, height - dafs); // vertical line
+		line(dafs, height - dafs, width - dafs, height - dafs); // horizontal line
+
 		textAlign(CENTER, CENTER);
-		fill(255);
-		stroke(255);
-		line(border, border, border, height - border);
 
-		for(int ya = 0; ya <= 150; ya += 10) {
-			float y = map(ya, 0, 150, height - border, border);
-
-			line(border, y, border - 5, y);
-
-			text(ya, border / 2, y);
+		// y-axis values
+		for(int i = 0; i < 160; i += 10) {
+			float y = map(i, 0, 150, height - dafs, dafs);
+			line(dafs, y, dafs - tickLength, y);
+			text(i, dafs / 2, y);
 		}
 
-		line(border, height - border, width - border, height - border);
-
+		// x-axis values
 		for(int i = 0; i < months.length; i++) {
-			float x = map(i, 0, months.length - 1, border, width - border);
+			float x = map(i, 0, months.length - 1, dafs, width - dafs);
+			line(x, height - dafs, x, (height - dafs) + tickLength);
+			text(months[i], x, height - (dafs / 2));
 
-			line(x, height - border, x, height - (border + 5));
+			// blue line graph
+			if(i + 1 != 12) {
+				stroke(0, 255, 255);
+				float y = map(rainFall[i], 0, 150, height - dafs, dafs);
+				float nextX = map(i + 1, 0, months.length - 1, dafs, width - dafs);
+				float nextY = map(rainFall[i + 1], 0, 150, height - dafs, dafs);
 
-			text(months[i], x, height - (border / 2));
+				line(x, y, nextX, nextY);
+				stroke(255, 255, 255);
+			}
 		}
-
-		/*
-		for(int i = 0; i < rainFall.length - 1; i++) {
-			float x1 = map(i)
-		}
-		*/
-	}
-
-	public void pieChart() {
-		background(128);
-		noFill();
-
-		arc(100, 100, 50, 50, 0, TWO_PI);
 	}
 
 	public void draw() {	
 		background(0);		
-		colorMode(HSB);	
-
-		// graph();
-		pieChart();
+		colorMode(RGB);	
+		graph();
 	}
 }
