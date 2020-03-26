@@ -145,16 +145,50 @@ public class ArraysExample extends PApplet
 			line(x1, y1, x2, y2);
 		}
 	}
-	
+
+	public void graph() {
+		float gap = height / 10;
+		float halfGap = gap / 2;
+		int xTicks = months.length;
+		int yTicks = 16;
+
+		background(0);
+		colorMode(HSB);
+		stroke(255);
+		textAlign(CENTER, CENTER);
+
+		line(gap, gap, gap, height - gap);
+		line(gap, height - gap, width - gap, height - gap);
+
+		for(int i = 0; i < yTicks; i++) {
+			float y = map(i, 0, yTicks - 1, height - gap, gap);
+			line(gap, y, gap - (halfGap / 4), y);
+			text(i * 10, halfGap, y);		
+		}
+
+		for(int i = 0; i < xTicks; i++) {
+			float x = map(i, 0, xTicks - 1, gap, width - gap);
+			line(x, height - gap, x, (height - gap) + (halfGap / 4));
+			text(months[i], x, height - halfGap);
+		}
+
+		colorMode(RGB);
+		stroke(0, 255, 255);
+
+		for(int i = 0; i < xTicks; i++) {
+			float x = map(i, 0, xTicks - 1, gap, width - gap);
+			float nextX = map(i + 1, 0, xTicks - 1, gap, width - gap);
+			float y = map(rainFall[i], 0, 150, height - gap, gap);
+
+			if((i + 1) != xTicks) {
+				float nextY = map(rainFall[i + 1], 0, 150, height - gap, gap);
+				line(x, y, nextX, nextY);
+			}
+		}
+	}
 
 	public void draw()
 	{	
-		background(0);		
-		colorMode(HSB);	
-
-		//drawBarChart();
-		//drawLineGraph();
-		drawPieChart();
-		stroke(255);
+		graph();
 	}
 }
