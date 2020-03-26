@@ -12,8 +12,13 @@ public class Main
 		processing.core.PApplet.runSketch(a, new Loops());
 	}
 
+	public void arraysExample() {
+		String[] a = {"MAIN"};
+		processing.core.PApplet.runSketch(a, new ArraysExample());
+	}
+
 	public static void main(String[] arg) {
 		Main main = new Main();
-		main.loops();
+		main.arraysExample();
 	}
 }
